@@ -1,0 +1,50 @@
+# Site settings
+title: Juicebox
+company: Juicebox Systems, Inc.
+description: An open-source encryption key recovery protocol
+logo_path: /assets/images/juicebox-logo.png 
+
+collections:
+  posts:
+    permalink: /blog/:title
+    sort_by: date
+
+contributors:
+  - name: Alex Bochannek
+    github: abochannek
+  - name: Simon Fell
+    github: simon-4242
+  - name: Moxie Marlinspike
+    github: moxie0
+  - name: Diego Ongaro
+    github: ongardie
+  - name: Daniela Perlein
+    github: daniela-juicebox
+    site: https://danielaperlein.com
+  - name: Nora Trapp
+    github: imperiopolis
+
+twitter: juicebox_xyz
+github: juicebox-systems
+
+plugins:
+  - jekyll-feed
+
+google_analytics:
+
+# Build settings
+theme: minima
+markdown: kramdown
+
+# Exclude from processing.
+exclude:
+  - .sass-cache/
+  - .jekyll-cache/
+  - gemfiles/
+  - Gemfile
+  - Gemfile.lock
+  - node_modules/
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/

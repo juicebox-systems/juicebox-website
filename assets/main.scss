@@ -1,0 +1,266 @@
+---
+---
+
+/* Variables */
+$base-font-family: Inter, Arial, sans-serif !default;
+$base-font-size: 17px !default;
+$content-width: 992px;
+$brand-color: #4609a5;
+$text-color: #333333;
+
+/* Import */
+@import "minima";
+
+/* Typography */
+h1 {
+  color: #000;
+  font-size: 38px !important;
+  line-height: 44px !important; 
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+
+h2 {
+  color: #444;
+  font-size: 30px !important;
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+
+h3 {
+  color: #555;
+  font-size: 24px !important;
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+
+/* Lists */
+ol, ul {
+  margin-left: 40px;
+}
+
+/* Links */
+a {
+  color: $brand-color;
+
+  &:hover, 
+  &:visited {
+    color: $brand-color;
+  }
+}
+
+/* Site Header */
+.site-header {
+  border-top: none;
+}
+
+.site-title {
+  width: 170px;
+}
+
+.site-nav .page-link {
+  color: $brand-color;
+  font-size: 17px;
+  font-weight: 500;
+  transition: all 0.2s;
+  border-bottom: 1px solid transparent;
+
+  &:hover {
+    border-bottom: 1px solid #f7c544;
+    text-decoration: none;
+  }
+
+  img {
+    height: 20px;
+  }
+
+  &.icon-link {
+    margin-right: 10px;
+  }
+
+  &.current {
+    color: #000;
+    text-decoration: none;
+  }
+}
+
+.site-nav .site-social {
+  display: inline;
+}
+
+/* Media Queries */
+@media screen and (max-width: 600px) {
+  .site-nav .site-social .page-link {
+    display: inline;
+
+    &.icon-link {
+      margin: 0;
+    }
+  }
+
+  .home > .site-header .site-nav {
+    background-color: transparent;
+    border: none;
+  }
+}
+
+/* Home Page */
+.home {
+  background-color: #531ac8;
+
+  & > .site-header {
+    border: none;
+
+    .site-nav .page-link {
+      color: #fff;
+    }
+
+    .menu-icon svg {
+      fill: #fff;
+    }
+  }
+
+  .page-content {
+    display: flex;
+
+    .wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  & > .site-footer {
+    border: none;
+    color: #fff;
+  }
+}
+
+/* Blog Posts */
+article {
+  img {
+    width: 800px;
+    display: block;
+    margin: 0 auto;
+  }
+}
+
+.post-divider {
+  width: 100%;
+  height: 1px;
+  background-color: #cdcdcd;
+  margin-bottom: 25px;
+}
+
+.post-header {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+/* Post Meta */
+.post-meta-col-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-flow: row;
+  grid-column-gap: 10px;
+  margin: 15px 0;
+}
+
+.post-meta-col-2 {
+  display: flex;
+  flex-direction: column;
+}
+
+.author-avatar {
+  border-radius: 25px;
+  width: 50px;
+  height: 50px;
+  overflow: hidden;
+}
+
+.author-name {
+  color: #000;
+  font-weight: 700;
+  font-size: 14px;
+  text-decoration: none;
+
+  &:hover, 
+  &:visited {
+    color: #000;
+  }
+}
+
+.dt-published {
+  font-size: 13px;
+  color: #888;
+}
+
+/* Contributors Section */
+.contributors {
+  grid-column-gap: 64px;
+  grid-row-gap: 56px;
+  grid-template-rows: auto auto;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-auto-columns: 1fr;
+  margin-top: 50px;
+  display: grid;
+
+  @media screen and (max-width: 991px) {
+    grid-column-gap: 40px;
+  }
+
+  @media screen and (max-width: 767px) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @media screen and (max-width: 479px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.contributor {
+  text-align: center;
+  flex-direction: column;
+  align-items: center;
+  font-size: 14px;
+  line-height: 22px;
+  display: flex;
+}
+
+.contributor-avatar {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  border: 1px solid #cdcdcd;
+  overflow: hidden;
+}
+
+.contributor-name {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 32px;
+  margin-bottom: 6px;
+}
+
+/* Utility Classes */
+.center-text {
+  text-align: center;
+}
+
+.info-box {
+  border: 1px dashed $brand-color;
+  border-radius: 6px;
+  margin-bottom: 15px;
+  padding: 6px;
+  color: $brand-color;
+  font-size: 13px;
+  font-weight: 500;
+
+  &:hover {
+    cursor: pointer;
+    border: 1px dashed rgba(70, 9, 165, 0.26);
+  }
+}

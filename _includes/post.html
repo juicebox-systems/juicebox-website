@@ -1,0 +1,28 @@
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <a class="post-link" href="{{ post.url }}"><h1 class="post-title p-name" itemprop="name headline">{{ post.title | escape }}</h1></a>
+    <div class="post-meta post-meta-col-wrapper">
+      <img class="author-avatar post-meta-col-1" src="https://avatars.githubusercontent.com/{{post.author-github}}">
+      <div class="post-meta-col-2">
+        <a href="https://github.com/{{post.author-github}}" target="_blank" class="author-name">
+          <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">{{ post.author-name }}</span></span>
+        </a>
+        <time class="dt-published" datetime="{{ post.date | date_to_xmlschema }}" itemprop="datePublished">
+          {%- assign date_format = site.minima.date_format | default: "%-d %B %Y" -%}
+          Published on {{ post.date | date: date_format }}
+        </time>
+      </div>
+    </div>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    {{ post.content }}
+  </div>
+
+  {%- if site.disqus.shortname -%}
+    {%- include disqus_comments.html -%}
+  {%- endif -%}
+
+  <a class="u-url" href="{{ post.url | relative_url }}" hidden></a>
+</article>
