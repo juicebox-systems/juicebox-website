@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "Key to Simplicity: Squeezing the hassle out of encryption key recovery"
+description: "Cryptography transforms the impossible task of safeguarding extensive data transmitted and stored across numerous systems and networks into the simpler task of securing a small singular key in one location. It is a magical thing. However, as services increasingly adopt end-to-end encryption for privacy features, this single small key has emerged as something with challenges and problems of its own."
 date:   2024-04-09 11:00:00 -0700
 author-name: Nora Trapp
 author-github: imperiopolis

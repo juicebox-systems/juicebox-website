@@ -1,8 +1,20 @@
 # Site settings
 title: Juicebox
 company: Juicebox Systems, Inc.
-description: An open-source encryption key recovery protocol
 logo_path: /assets/images/juicebox-logo.png 
+
+# SEO
+tagline: An open-source encryption key recovery protocol
+description: Juicebox is an open-source encryption key recovery protocol that provides high security coupled with a user-friendly design, to make encryption further accessible to larger numbers of people. Juicebox leverages programmable HSMs, distributed cryptography, and a user-friendly PIN-based recovery process to simplify key recovery without compromising security.
+twitter:
+  username: juicebox_xyz
+  card: summary
+
+defaults:
+  - scope:
+      path: ""
+    values:
+      image: /assets/images/seo-logo.png
 
 collections:
   posts:
