@@ -1,30 +1,38 @@
 ---
 layout: post
-title: "Running a Juicebox HSM realm"
-description: "Details on how to setup and run a Juicebox HSM realm with Entrust HSMs."
-date: 2024-08-14 11:30:00 -0700
+title: "Running a Juicebox hardware realm"
+description: "Learn about the complexities of running and maintaining a Juicebox hardware realm with Entrust HSMs."
+date: 2024-08-15 11:00:00 -0700
 author-name: Simon Fell
 author-github: superfell
 ---
 
-By necessity the architecture of the [HSM
-realm](https://github.com/juicebox-systems/juicebox-hsm-realm) is more complex
-than the [software
-realm](https://github.com/juicebox-systems/juicebox-software-realm). Consisting
-of HSMs, physical servers, multiple services and cloud resources, initializing,
-deploying and running a HSM backed realm is more complex.
+As we [previously
+mentioned](https://juicebox.xyz/blog/key-to-simplicity-squeezing-the-hassle-out-of-encryption-key-recovery#trusting-deliberately),
+the Juicebox protocol allows for two types of realms – hardware realms backed by
+secure hardware (HSMs), and software realms that can run on commodity hardware.
+This blog post aims to provide a deeper look into the process of running the
+former.
 
-This blog post contains details on creating and running a HSM backed realm using
-Entrust HSMs. The [HSM realm
+If you've been looking at the source code we published, you may have noticed the
+architecture of our [hardware
+realm](https://github.com/juicebox-systems/juicebox-hsm-realm) is more complex
+than our [software
+realm](https://github.com/juicebox-systems/juicebox-software-realm). This is by
+design, as it requires multiple HSMs, physical servers to host them, and cloud
+resources to provide its significantly higher level of security. Additionally,
+these realms require a lengthy initialization and deployment process that
+software realms avoid.
+
+As you make your way through this blog post, you may want to reference the
+useful information located in the [HSM realm
 readme](https://github.com/juicebox-systems/juicebox-hsm-realm/blob/main/README.md)
 and the [Entrust HSM module
-readme](https://github.com/juicebox-systems/juicebox-hsm-realm/blob/main/entrust_hsm/README.md)
-both contain useful information that you may want to reference as you work
-through this blog post.
+readme](https://github.com/juicebox-systems/juicebox-hsm-realm/blob/main/entrust_hsm/README.md).
 
 ## Hardware
 
-The HSMs are PCIe cards and need physical servers to be installed in. The
+HSMs are PCIe cards and need physical servers to be installed in. The
 services running on these servers use various services from [Google Cloud
 Platform](https://console.cloud.google.com/). Ideally your servers are located
 somewhere that is close to a GCP zone. You'll need the following hardware in
@@ -69,11 +77,23 @@ realm services. Credentials to access these will be needed for all hosts
 zone as multi-zone configurations change the [semantics of write
 operations](https://cloud.google.com/bigtable/docs/replication-overview#consistency-model).
 
+## Build
+
+By default the Entrust related binaries are not included in the build. Before
+you can build the Entrust related binaries you'll need to have the Entrust Linux
+Security World and CodeSafe SDKs installed. Once installed you can build
+everything with `cargo build --all` from the root of the hsm realm repo. There
+are more details on the build environment in the HSM realm readme.
+
+Separately the PowerPC binary that runs on the HSM will need building. The
+Entrust HSM readme has details on this.
+
 ## HSM Initialization
 
-For test clusters the `entrust_ops` tool that is part of the [HSM
-repo](https://github.com/juicebox-systems/juicebox-hsm-realm) can be used to
-initialize the NVRAM, create the Security World and the relevant realm keys. The
+For test clusters the `entrust_ops` is used to initialize the NVRAM, create the
+Security World and the relevant realm keys. During this process you'll need the
+blank smart cards in order to create the Administrator Card Set (ACS) and the
+Operator Card Set (OCS). The
 [`entrust_hsm/README.md`](https://github.com/juicebox-systems/juicebox-hsm-realm/blob/main/entrust_hsm/README.md)
 has more information about this process. Unless you've purchased remote card
 readers physical access to the HSMs will be required during this process in
@@ -196,7 +216,9 @@ python3 -c \
 `RsaPkcs1Sha256` and `Edwards25519` algorithms are also supported and are better
 choices for production tenants. In this case the tenant will need to provide
 their JWT public key. A tenant may have multiple versions of a key to aid in key
-rotation.
+rotation. The `tokens` tool in the [Client
+SDK](https://github.com/juicebox-systems/juicebox-sdk) can also be useful in
+generating auth tokens for testing.
 
 By default each tenant is rate limited to 10 requests a second. The `cluster
 tenant` command can be used to set a different rate limit for a tenant.
