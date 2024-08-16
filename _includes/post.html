@@ -17,7 +17,12 @@
   </header>
 
   <div class="post-content e-content" itemprop="articleBody">
-    {{ post.content }}
+    <!-- {%- if include.show_summary == true -%} -->
+      {{ post.content | split: '<!--more-->' | first | markdownify }}
+      <p><a href="{{ post.url | relative_url }}">Read more…</a></p>
+    <!-- {%- else -%} -->
+      {{ post.content }}
+    <!-- {%- endif -%} -->
   </div>
 
   {%- if site.disqus.shortname -%}
